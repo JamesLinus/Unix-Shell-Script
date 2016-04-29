@@ -7,5 +7,7 @@
 int parse (char** input) {
     int argc = 0;
     
+    fprintf(stdout, "'%s'\n", *input);
+    
     return argc;
 }
