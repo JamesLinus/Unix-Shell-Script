@@ -14,4 +14,6 @@
 
 #define MAXINPUTLENGTH 1024
 
+int argumentCount;
+
 // Prototypes

@@ -4,50 +4,39 @@
     Parses the input buffer into it's separate arguments.
     Returns argument count.
 */
-int parse (char** input) {
-    int argument_count = 0;
-    int quotes_count = 0;
-    char* idx;
-    char** argument = input;
+char** parse (char* input, int *argc) {
+	int len = sizeof(char*) * strlen(input);
+
+	char** argvReal = malloc(len);
+	char** argvTemp = argvReal;
+
+    char*  idx;
+    char*  argument = input;
     
-    while (**argument != 0) {
-        
+    while (*argument != '\0') {        
         // Leading whitespaces
-        while (**argument == ' ' || **argument == '\n') {
-            **argument++ = 0;
+        while (*argument == ' ' || *argument == '\n') {
+            *argument++ = '\0';
         }
         
         // Found argument
-        if (**argument != 0) {
-            argument_count++;
+        if (*argument != '\0') {
+            *argc += 1;
             idx = argument;
         }
         
-        while (**argument != 0 && **argument != ' ' && **argument != '\n') {
-            if(**argument == '\"') {
-                quotes_count++;
-                argument++;
-                
-                **(argument - quotes_count) = **argument;
-                while (**argument != '\"') {
-                    argument++;
-                    *(argument - quotes_count);
-                }
-                quotes_count++;
-                
-                argument++;
-                **(argument - quotes_count) = **argument;
-                **(argument - (quotes_count - 1)) = **argument;
-            } else {
-                argument++;
-                **(argument - quotes_count) = **argument;
-            }
+        // Find end of argument
+        while (*argument != '\0' && *argument != ' ' && *argument != '\n') {
+        	argument++;
         }
-        quotes_count = 0;
-        *argument++ = idx;
+
+        // Store argument location in argv array
+        *argvTemp++ = idx;
     }
     
-    *argument = 0;
+    // Set terminating character
+    *argvTemp = '\0';
     
-    return argument_count;
+    // Return
+    return argvReal;
 }

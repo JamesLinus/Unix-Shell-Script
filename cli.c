@@ -1,17 +1,19 @@
 #include "headers/cli.h"
 
-int execute (char* input) {
-    char** parsed_input = &input;
-    
+int execute (char* input) {   
     pid_t process_id;
     int process_status;
-    int argumentCount = 0;
     int inputbufferlength = strlen(input);
         
     if (input[inputbufferlength - 1] == '\n')
         input[inputbufferlength - 1] = '\0';
         
-    argumentCount = parse(parsed_input);
+    char** parsed_input = parse(input, &argumentCount);
+
+    fprintf(stdout, "[%d]\n", argumentCount);
+    for(int i = 0; i < argumentCount; i++) {
+        fprintf(stdout, "'%s'\n", parsed_input[i]);
+    }
     
     process_id = fork();
     if (process_id < 0) {
@@ -41,6 +43,8 @@ int main (int argc, char* argv[]) {
             
         execute(inputbuffer);
             
+        // Reset argc
+        argumentCount = 0;
     }
     
     return 0;

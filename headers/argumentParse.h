@@ -3,4 +3,4 @@
 #include <string.h>
 
 // Prototypes
-int parse (char** input);
+char** parse (char* input, int* argc);
