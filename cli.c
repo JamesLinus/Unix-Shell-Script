@@ -24,6 +24,8 @@ void execute (char* input) {
             fprintf(stdout, "'%s' ", parsed_input[i]);
         }
         fprintf(stdout, "\n");
+
+        fprintf(stdout, "'%s'\n", global_calculator_directory);
     #endif
 
     if (!internal_controller (parsed_input, global_argument_count)) {
@@ -44,6 +46,18 @@ void execute (char* input) {
 
     }
 }
+
+/*  
+    Sets global paths for external program execution.
+*/
+void set_external_paths() {
+    char* buf = malloc(DIRECTORY_LENGTH);
+    char* ptr;
+    ptr = getcwd(buf, DIRECTORY_LENGTH);
+    snprintf(global_calculator_directory, DIRECTORY_LENGTH, "%s/ext/calc/calc", ptr);
+    free(buf);
+}
+
 /*
     Main execution routine.
 */
@@ -51,6 +65,7 @@ int main (int argc, char* argv[]) {
     char inputbuffer[MAXINPUTLENGTH];
 
     set_current_working_directory();
+    set_external_paths();
     
     while (1) {
         fprintf(stdout, "$> ");
