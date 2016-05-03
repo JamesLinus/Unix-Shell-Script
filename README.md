@@ -5,7 +5,7 @@ Script reads a command from the keyboard and executes it.
 ## Basic Commands
 ### Internal
 ##### exit
-Causes the command line interpreter to terminate, an alternative to [Ctrl-D]
+Causes the command line interpreter to terminate, an alternative to [Ctrl-C]
 
 ##### cd *dir*
 Changes the command line interpreter's current working directory to the relative or absolute path given as a command line argument.
