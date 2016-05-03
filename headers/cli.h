@@ -19,4 +19,4 @@ int   global_argument_count;
 char  global_current_working_directory[CURR_WORKING_DIR_LEN];
 
 // Prototypes
-int execute (char* input);
+void execute (char* input);

@@ -2,7 +2,13 @@
 
 #define DEBUG 0
 
-int execute (char* input) {   
+/*
+    Takes the input line given from main and runs parse.
+    Checks the command arguments returned for internal
+    execution.
+    Executes the command arguments if not internal.
+*/
+void execute (char* input) {   
     pid_t process_id;
     int process_status;
     int inputbufferlength = strlen(input);
@@ -13,11 +19,11 @@ int execute (char* input) {
     char** parsed_input = parse(input, &global_argument_count);
 
     #if DEBUG 
-    fprintf(stdout, "[%d] ", global_argument_count);
-    for(int i = 0; i < global_argument_count; i++) {
-        fprintf(stdout, "'%s' ", parsed_input[i]);
-    }
-    fprintf(stdout, "\n");
+        fprintf(stdout, "[%d] ", global_argument_count);
+        for(int i = 0; i < global_argument_count; i++) {
+            fprintf(stdout, "'%s' ", parsed_input[i]);
+        }
+        fprintf(stdout, "\n");
     #endif
 
     if (!internal_controller (parsed_input, global_argument_count)) {
@@ -25,7 +31,7 @@ int execute (char* input) {
         process_id = fork();
         if (process_id < 0) {
             fprintf(stderr, "Fork failed.");
-            return 0;
+            return;
         }
         
         if (process_id == 0) {
@@ -37,10 +43,10 @@ int execute (char* input) {
             fprintf(stderr, "Wait failed.");
 
     }
-            
-    return 1;
 }
-
+/*
+    Main execution routine.
+*/
 int main (int argc, char* argv[]) {
     char inputbuffer[MAXINPUTLENGTH];
 

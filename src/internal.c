@@ -26,6 +26,11 @@ int internal_controller (char** input, int argument_count) {
 	return status;
 }
 
+/*  
+	Changes the current working directory and sets the
+	global value.
+	Returns 1 for the controller.
+*/
 int change_directory(char** input, int argument_count) {
 	int error_check = 0;
 
@@ -44,6 +49,11 @@ int change_directory(char** input, int argument_count) {
 	return 1;
 }
 
+/*  
+	Sets the global working directory value to the 
+	current working directory.
+	Returns 1 for the controller.
+*/
 int set_current_working_directory() {
 	char* buf = malloc(CURR_WORKING_DIR_LEN);
 	char* ptr;
