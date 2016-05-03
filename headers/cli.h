@@ -1,5 +1,4 @@
 #include <fcntl.h>
-#include <unistd.h>
 #include <errno.h>
 #include <assert.h>
 #include <dirent.h>
@@ -11,9 +10,13 @@
 #include <sys/stat.h>
 
 #include "argumentParse.h"
+#include "internal.h"
 
-#define MAXINPUTLENGTH 1024
+#define MAXINPUTLENGTH       1024
+#define CURR_WORKING_DIR_LEN 256
 
-int argumentCount;
+int   global_argument_count;
+char  global_current_working_directory[CURR_WORKING_DIR_LEN];
 
 // Prototypes
+int execute (char* input);
