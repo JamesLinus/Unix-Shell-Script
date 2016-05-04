@@ -1,0 +1,1 @@
+gcc -o listf listf.c

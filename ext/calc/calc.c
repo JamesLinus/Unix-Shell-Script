@@ -9,7 +9,7 @@ int    subtraction (int x, int y);      // x - y
 int    multiplication (int x, int y);   // x * y
 int    division (int x, int y);         // x / y
 
-int main () {
-	fprintf(stdout, "%s\n", "External Test.");
+int main (int argc, char* argv[])  {
+	fprintf(stdout, "%s\n", "Calc External Test.");
 	return 0;
 }

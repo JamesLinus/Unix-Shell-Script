@@ -40,3 +40,19 @@ char** parse (char* input, int *argc) {
     // Return
     return argvReal;
 }
+
+/*
+	Resolves pathing for running external commands.
+*/
+char* resolvepath(char* input) {
+	char* command = '\0';
+
+    if (!strcmp(input, "calc"))
+        command = global_calculator_directory;
+    else if (!strcmp(input, "listf"))
+    	command = global_listf_directory;
+    else
+        command = input;
+
+    return command;
+}

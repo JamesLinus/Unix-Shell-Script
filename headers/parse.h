@@ -4,3 +4,4 @@
 
 // Prototypes
 char** parse (char* input, int* argc);
+char*  resolvepath(char* input);
